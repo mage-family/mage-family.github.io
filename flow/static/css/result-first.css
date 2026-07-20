@@ -199,9 +199,68 @@ a { color: inherit; }
 .rf-footnote { margin-top: 10px; color: var(--rf-light); font-size: 11px; line-height: 1.45; }
 
 .rf-gallery-tabs { margin-top: 36px; }
-.rf-gallery-group + .rf-gallery-group { margin-top: 40px; }
+.rf-gallery-group + .rf-gallery-group { margin-top: 48px; }
 .rf-gallery-group-head { margin-bottom: 13px; text-align: center; }
 .rf-gallery-group h3 { margin: 0; color: var(--rf-ink); font-size: 24px; font-weight: 700; }
+
+.rf-image-strip-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.rf-image-strip-shell::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  bottom: 18px;
+  width: 74px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(248,250,252,0), rgba(15,23,42,.13));
+  box-shadow: inset -20px 0 22px -22px rgba(15,23,42,.55);
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+.rf-image-strip-shell.is-at-end::after { opacity: 0; }
+.rf-image-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 4px 56px 18px 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: #b8c1cc #eef2f7;
+}
+.rf-image-strip:focus-visible { outline: 3px solid rgba(0,120,212,.22); outline-offset: 2px; }
+.rf-image-strip::-webkit-scrollbar { height: 9px; }
+.rf-image-strip::-webkit-scrollbar-track { background: #eef2f7; border-radius: 999px; }
+.rf-image-strip::-webkit-scrollbar-thumb { background: #b8c1cc; border-radius: 999px; }
+.rf-image-strip-item {
+  flex: 0 0 auto;
+  height: min(72vh, 820px);
+  margin: 0;
+  overflow: hidden;
+  scroll-snap-align: start;
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  box-shadow: var(--shadow-md);
+}
+.rf-image-strip-item img {
+  width: auto;
+  max-width: none;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+.rf-image-strip-item img[src] { opacity: 1; }
+.rf-diversity-figure { margin: 56px auto 0; text-align: center; }
+.rf-diversity-figure img { width: 100%; height: auto; border-radius: var(--rf-radius); box-shadow: var(--shadow-md); }
+.rf-diversity-figure figcaption { margin-top: 10px; color: #666; font-size: .83rem; line-height: 1.5; }
 
 /* Match the original Mage-VL feature-panel surface exactly. */
 .rf-media-card,
@@ -233,6 +292,8 @@ a { color: inherit; }
   .rf-hero { padding-top: 48px; }
   .rf-hero-media { grid-template-columns: 1fr; }
   .rf-media-card img { min-height: 0; }
+  .rf-image-strip-item { height: min(68vh, 620px); }
+  .rf-image-strip-shell::after { width: 52px; }
   .rf-metric-grid { grid-template-columns: repeat(2, 1fr); }
   .rf-metric:nth-child(odd) { border-left: 0; }
   .rf-metric:nth-child(even) { border-left: 1px solid var(--rf-line); }

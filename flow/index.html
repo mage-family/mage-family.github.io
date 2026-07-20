@@ -16,15 +16,13 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/result-first.css?v=6">
+  <link rel="stylesheet" href="static/css/result-first.css?v=7">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
-  <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
-  <script defer src="static/js/result-first.js?v=3"></script>
+  <script defer src="static/js/result-first.js?v=4"></script>
 </head>
 <body>
   <nav class="rf-nav" aria-label="Project navigation">
@@ -220,28 +218,37 @@
         <div class="rf-gallery-tabs">
           <div class="rf-gallery-group">
             <div class="rf-gallery-group-head"><h3>Text-to-image</h3></div>
-            <div id="t2i-carousel" class="carousel results-carousel">
-              <div class="item"><a class="glightbox" href="static/imgs/t2i_general.jpg" data-gallery="t2i"><img src="static/imgs/t2i_general.jpg" alt="General and imaginative scenes" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/t2i_cuisine.jpg" data-gallery="t2i"><img src="static/imgs/t2i_cuisine.jpg" alt="Cuisine and still-life generations" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/t2i_portrait.jpg" data-gallery="t2i"><img src="static/imgs/t2i_portrait.jpg" alt="Portrait generations" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/t2i_text_en.jpg" data-gallery="t2i"><img src="static/imgs/t2i_text_en.jpg" alt="English text rendering examples" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/t2i_text_zh.jpg" data-gallery="t2i"><img src="static/imgs/t2i_text_zh.jpg" alt="Chinese text rendering examples" loading="lazy"></a></div>
+            <div class="rf-image-strip-shell">
+              <div class="rf-image-strip" tabindex="0" aria-label="Text-to-image result walls; scroll horizontally for more">
+                <figure class="rf-image-strip-item"><img src="static/imgs/t2i_general.jpg" width="2400" height="3214" alt="General and imaginative scenes" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/t2i_cuisine.jpg" width="2400" height="3165" alt="Cuisine and still-life generations" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/t2i_portrait.jpg" width="2400" height="3285" alt="Portrait generations" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/t2i_text_en.jpg" width="2400" height="3631" alt="English text rendering examples" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/t2i_text_zh.jpg" width="2400" height="3072" alt="Chinese text rendering examples" decoding="async"></figure>
+              </div>
             </div>
           </div>
+
           <div class="rf-gallery-group">
             <div class="rf-gallery-group-head"><h3>Instruction-based editing</h3></div>
-            <div id="edit-carousel" class="carousel results-carousel">
-              <div class="item"><a class="glightbox" href="static/imgs/one_to_many_editing_diversity.jpg" data-gallery="edit"><img src="static/imgs/one_to_many_editing_diversity.jpg" alt="One source image edited in many different ways" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_showcase_2.jpg" data-gallery="edit"><img src="static/imgs/edit_showcase_2.jpg" alt="Mage-Flow-Edit capability showcase" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_content.jpg" data-gallery="edit"><img src="static/imgs/edit_content.jpg" alt="Content and object editing" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_scene_subject.jpg" data-gallery="edit"><img src="static/imgs/edit_scene_subject.jpg" alt="Scene, subject, and camera editing" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_appearance.jpg" data-gallery="edit"><img src="static/imgs/edit_appearance.jpg" alt="Appearance and artistic edits" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_human_creative.jpg" data-gallery="edit"><img src="static/imgs/edit_human_creative.jpg" alt="Human-centered and creative edits" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_lowlevel.jpg" data-gallery="edit"><img src="static/imgs/edit_lowlevel.jpg" alt="Low-level and conditional reconstruction" loading="lazy"></a></div>
-              <div class="item"><a class="glightbox" href="static/imgs/edit_restoration.jpg" data-gallery="edit"><img src="static/imgs/edit_restoration.jpg" alt="Image degradation and restoration" loading="lazy"></a></div>
+            <div class="rf-image-strip-shell">
+              <div class="rf-image-strip" tabindex="0" aria-label="Image-editing result walls; scroll horizontally for more">
+                <figure class="rf-image-strip-item"><img src="static/imgs/edit_showcase_2.jpg" width="2600" height="3860" alt="Mage-Flow-Edit capability showcase" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_content.jpg" width="2400" height="3600" alt="Content and object editing" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_scene_subject.jpg" width="2400" height="3600" alt="Scene, subject, and camera editing" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_appearance.jpg" width="2400" height="3600" alt="Appearance and artistic edits" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_human_creative.jpg" width="2400" height="3600" alt="Human-centered and creative edits" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_lowlevel.jpg" width="2400" height="3600" alt="Low-level and conditional reconstruction" decoding="async"></figure>
+                <figure class="rf-image-strip-item"><img data-src="static/imgs/edit_restoration.jpg" width="2400" height="3600" alt="Image degradation and restoration" decoding="async"></figure>
+              </div>
             </div>
           </div>
         </div>
+
+        <figure class="rf-diversity-figure">
+          <img src="static/imgs/one_to_many_editing_diversity.jpg" width="1761" height="979" alt="Mage-Flow-Edit one-to-many editing diversity" loading="lazy" decoding="async">
+          <figcaption>One-to-many editing diversity — from a single source image and instruction, Mage-Flow-Edit produces multiple faithful yet varied edits.</figcaption>
+        </figure>
       </div>
     </section>
 

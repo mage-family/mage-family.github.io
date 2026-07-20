@@ -59,16 +59,43 @@ document.addEventListener('DOMContentLoaded', function () {
     window.GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true });
   }
 
-  if (window.bulmaCarousel) {
-    window.bulmaCarousel.attach('#t2i-carousel, #edit-carousel', {
-      slidesToScroll: 1,
-      slidesToShow: 1,
-      loop: true,
-      navigation: true,
-      pagination: true,
-      autoplay: false
-    });
-  }
+  document.querySelectorAll('.rf-image-strip').forEach(function (strip) {
+    var shell = strip.closest('.rf-image-strip-shell');
+    var lazyImages = Array.from(strip.querySelectorAll('img[data-src]'));
+
+    function loadImage(image) {
+      if (!image.dataset.src) return;
+      image.src = image.dataset.src;
+      image.removeAttribute('data-src');
+    }
+
+    if ('IntersectionObserver' in window) {
+      var imageObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          loadImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { root: strip, rootMargin: '0px 96px', threshold: 0.01 });
+      lazyImages.forEach(function (image) { imageObserver.observe(image); });
+    } else {
+      lazyImages.forEach(loadImage);
+    }
+
+    var hintFrame = 0;
+    function updateScrollHint() {
+      hintFrame = 0;
+      var atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2;
+      if (shell) shell.classList.toggle('is-at-end', atEnd);
+    }
+    function requestHintUpdate() {
+      if (!hintFrame) hintFrame = window.requestAnimationFrame(updateScrollHint);
+    }
+    strip.addEventListener('scroll', requestHintUpdate, { passive: true });
+    window.addEventListener('resize', requestHintUpdate, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(requestHintUpdate).observe(strip);
+    requestHintUpdate();
+  });
 
   ['t2i-table', 'edit-table'].forEach(function (tableId) {
     var table = document.getElementById(tableId);
