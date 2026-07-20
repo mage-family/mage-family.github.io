@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Mage-Flow: Efficient Native-Resolution Diffusion Transformer for Image Generation and Editing">
+  <meta name="keywords" content="Mage-Flow, text-to-image, image editing, diffusion transformer, native resolution, Mage-VAE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mage-Flow: Efficient Native-Resolution Diffusion Transformer for Image Generation and Editing</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css"/>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-2 publication-title">
+            Mage-Flow: Efficient Native-Resolution Diffusion Transformer<br>for Image Generation and Editing
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b>Microsoft Mage Team</b></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2511.22699" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+              <span class="link-block">
+                <a href="https://github.com/microsoft/Mage" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
+              <span class="link-block">
+                <a href="https://huggingface.co/microsoft/Mage-Flow" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><p style="font-size:18px">🤗</p></span><span>Mage-Flow</span></a></span>
+              <span class="link-block">
+                <a href="https://huggingface.co/microsoft/Mage-Flow-Edit" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><p style="font-size:18px">🤗</p></span><span>Mage-Flow-Edit</span></a></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEASER ══ -->
+<section class="section" style="padding-top:0; padding-bottom:0">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content" style="padding:1rem 1.5rem">
+        <a class="glightbox" href="static/imgs/one_to_many_editing_diversity.jpg" data-gallery="teaser">
+          <img src="static/imgs/one_to_many_editing_diversity.jpg" class="fig-img" alt="Mage-Flow-Edit one-to-many editing diversity" loading="lazy"/>
+        </a>
+        <p class="caption" style="margin-top:10px">One-to-many editing diversity — from a single source image and instruction, Mage-Flow-Edit produces multiple faithful yet varied edits. Click to expand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABSTRACT ══ -->
+<section class="section">
+  <div class="container is-max-desktop" style="margin-bottom:2vh">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          Large-scale visual generators are increasingly capable but costly to train, fine-tune, and deploy. We introduce <strong>Mage-Flow</strong>, a compact 4B-scale generative stack for efficient text-to-image generation and instruction-based image editing. The stack is built from two co-designed components: <strong>Mage-VAE</strong>, a lightweight high-fidelity latent tokenizer, and a <strong>Native-Resolution Multimodal Diffusion Transformer</strong> trained with rectified flow matching. Mage-VAE uses one-step diffusion-style encoding and decoding with anchor-latent regularization, preserving the reconstruction quality of strong public VAEs while reducing tokenization cost by more than an order of magnitude. Together with native-resolution packing and stack-level CUDA kernel fusion, the stack supports flexible-resolution training and improves end-to-end training throughput by about 2.5×. Built on this foundation, we develop a complete model family with Base, RL-aligned, and Turbo variants for both generation and editing. Diffusion-NFT improves prompt following, text rendering, aesthetic quality, and editing fidelity, while few-step distillation with adversarial perceptual guidance produces 4-step Turbo models for low-latency inference. Despite its compact scale, Mage-Flow and Mage-Flow-Edit achieve competitive performance across standard generation and editing benchmarks. More importantly, the Turbo variants make high-resolution generation and editing practical for interactive use: at 1024² resolution on a single NVIDIA A100 GPU, Mage-Flow-Turbo generates an image in 0.59 s, and Mage-Flow-Edit-Turbo edits an image in 1.02 s, while maintaining a small memory footprint. These results show that careful tokenizer–backbone–system co-design can deliver strong high-resolution generation and editing within an efficient 4B model family.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HIGHLIGHTS ══ -->
+<section class="section" style="padding:2.5rem 0">
+<div class="container is-max-desktop">
+  <div class="feature-container">
+
+    <div class="feature-tabs">
+      <div class="feature-tab" data-color="blue" onclick="showFeature(0,'blue',event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v16"/>
+        </svg>
+        <span>Mage-VAE Tokenizer</span>
+      </div>
+      <div class="feature-tab" data-color="amber" onclick="showFeature(1,'amber',event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.2"/><path d="M14 17h7M17.5 14v7"/>
+        </svg>
+        <span>Native-Resolution MMDiT</span>
+      </div>
+      <div class="feature-tab" data-color="purple" onclick="showFeature(2,'purple',event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+        </svg>
+        <span>Full Family &amp; Speed</span>
+      </div>
+    </div>
+
+    <div class="feature-content-wrapper">
+
+      <div class="feature-panel" data-color="blue">
+        <div class="feature-panel-title">Mage-VAE — efficient latent tokenizer</div>
+        <p class="feature-panel-text">Mage-VAE is a <strong>symmetric one-step diffusion codec</strong>: the decoder is a fully-convolutional one-step pixel-diffusion model (no global attention) and the encoder is its architectural dual. A standard Gaussian-prior KL is replaced with an <strong>anchor-latent KL</strong> that regularizes the posterior toward FLUX.2-VAE latents, giving a generation-ready <strong>128-channel, 16×-downsampled</strong> latent space. It matches FLUX.2-VAE reconstruction fidelity while using <strong>~12× / ~22× fewer encode / decode MACs per pixel</strong>.</p>
+        <div class="feature-stats">
+          <div class="feature-stat"><div class="feature-stat-num">~12×</div><div class="feature-stat-lbl">Fewer encode MACs</div></div>
+          <div class="feature-stat"><div class="feature-stat-num">~22×</div><div class="feature-stat-lbl">Fewer decode MACs</div></div>
+          <div class="feature-stat"><div class="feature-stat-num">128-ch</div><div class="feature-stat-lbl">16× downsample latent</div></div>
+        </div>
+        <a class="glightbox feature-panel-img" href="static/imgs/mage_vae.jpg" data-gallery="hl">
+          <img src="static/imgs/mage_vae.jpg" loading="lazy"/>
+        </a>
+        <p class="feature-panel-cap">Mage-VAE: one-step diffusion encode/decode with anchor-latent KL regularization.</p>
+      </div>
+
+      <div class="feature-panel" data-color="amber">
+        <div class="feature-panel-title">Native-Resolution Multimodal DiT</div>
+        <p class="feature-panel-text">A shared 4B <strong>NR-MMDiT</strong> encodes prompts with Qwen3-VL and images with Mage-VAE, then processes <strong>packed</strong> variable-length image+text sequences with per-sample 2D rotary embeddings and joint self-attention. Native-resolution packing removes bucket quantization and padding, lets one checkpoint generalize to <strong>any output size (512–2048, incl. 4:1)</strong>, and fuses the CFG cond/uncond branches into a single forward.</p>
+        <a class="glightbox feature-panel-img" href="static/imgs/nr_mmdit.jpg" data-gallery="hl">
+          <img src="static/imgs/nr_mmdit.jpg" loading="lazy"/>
+        </a>
+        <p class="feature-panel-cap">Native-resolution packing of variable-length image+text tokens through the NR-MMDiT.</p>
+      </div>
+
+      <div class="feature-panel" data-color="purple">
+        <div class="feature-panel-title">Full family &amp; interactive latency</div>
+        <p class="feature-panel-text">One shared stack powers two instantiations — <strong>Mage-Flow</strong> (generation) and <strong>Mage-Flow-Edit</strong> (editing) — each in <strong>Base</strong>, <strong>RL-aligned</strong>, and <strong>4-step Turbo</strong> variants. From Base, generation is aligned with <strong>Diffusion-NFT</strong> (prompt following, aesthetics, text rendering, preference) and distilled with <strong>decoupled-DMD + adversarial perceptual guidance</strong> into the Turbo model; editing reuses the recipe over a generation+editing data mix. Native-resolution packing + fused CUDA kernels raise training MFU from ~33% → ~77% (~2.5× faster), and the Turbo models make high-resolution use interactive.</p>
+        <div class="feature-stats">
+          <div class="feature-stat"><div class="feature-stat-num">0.59 s</div><div class="feature-stat-lbl">Turbo image @1024²</div></div>
+          <div class="feature-stat"><div class="feature-stat-num">1.02 s</div><div class="feature-stat-lbl">Turbo edit @1024²</div></div>
+          <div class="feature-stat"><div class="feature-stat-num">~18–20 GB</div><div class="feature-stat-lbl">Peak memory</div></div>
+        </div>
+        <div class="columns is-mobile" style="margin-top:6px">
+          <div class="column is-half">
+            <a class="glightbox feature-panel-img" href="static/imgs/speed_generation.jpg" data-gallery="speed"><img src="static/imgs/speed_generation.jpg" loading="lazy"/></a>
+          </div>
+          <div class="column is-half">
+            <a class="glightbox feature-panel-img" href="static/imgs/speed_editing.jpg" data-gallery="speed"><img src="static/imgs/speed_editing.jpg" loading="lazy"/></a>
+          </div>
+        </div>
+        <p class="feature-panel-cap">Quality vs. latency &amp; memory at 1024² on a single A100 — GenEval (generation, left) and GEdit-EN (editing, right). Mage-Flow sits at the fast, low-memory frontier.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ PERFORMANCE ══ -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Performance 📊</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="margin-bottom:2vh">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+
+        <h2 class="title is-4">Text-to-Image</h2>
+        <p style="font-size:.82rem;color:#888;text-align:center">GenEval / CVTG-2K / OneIG on 0–1; TIIF-Long on 0–100; LongText-EN on 0–1 &nbsp;·&nbsp; Click a column to sort</p>
+        <div class="table-container m-2">
+          <table class="table is-striped is-hoverable is-fullwidth" id="t2i-table">
+            <thead>
+              <tr>
+                <th style="cursor:pointer">Model</th><th style="cursor:pointer">#Params</th><th style="cursor:pointer">Steps</th>
+                <th style="cursor:pointer">GenEval ↑</th><th style="cursor:pointer">TIIF-Long</th><th style="cursor:pointer">CVTG-2K</th>
+                <th style="cursor:pointer">OneIG-EN</th><th style="cursor:pointer">LongText-EN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Qwen-Image</td><td>20B</td><td>50</td><td>0.87</td><td><b>86.83</b></td><td>0.829</td><td>0.539</td><td>0.943</td></tr>
+              <tr><td>LongCat-Image</td><td>6B</td><td>50</td><td>0.87</td><td>81.30</td><td>0.866</td><td>0.516</td><td>0.885</td></tr>
+              <tr><td>Z-Image-Turbo</td><td>6B</td><td>8</td><td>0.82</td><td>80.05</td><td>0.859</td><td>0.528</td><td>0.917</td></tr>
+              <tr><td>FLUX.2-Klein-4B</td><td>4B</td><td>4</td><td>0.83</td><td>79.04</td><td>0.628</td><td>0.500</td><td>0.649</td></tr>
+              <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>4</td><td>0.86</td><td>84.13</td><td>0.424</td><td>0.538</td><td>0.872</td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow-Base ★</strong></td><td>4B</td><td>30</td><td>0.79</td><td>83.19</td><td>0.851</td><td>0.542</td><td>0.904</td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow ★</strong></td><td>4B</td><td>20</td><td><b>0.90</b></td><td>84.70</td><td><b>0.887</b></td><td>0.536</td><td><b>0.944</b></td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow-Turbo ★</strong></td><td>4B</td><td>4</td><td>0.88</td><td>84.16</td><td>0.873</td><td>0.523</td><td>0.911</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="title is-4" style="margin-top:2rem">Image Editing</h2>
+        <p style="font-size:.82rem;color:#888;text-align:center">ImgEdit-Bench 0–5 &nbsp;·&nbsp; GEdit 0–10 &nbsp;·&nbsp; TextEdit-Bench 0–25 &nbsp;·&nbsp; “–” not reported</p>
+        <div class="table-container m-2">
+          <table class="table is-striped is-hoverable is-fullwidth" id="edit-table">
+            <thead>
+              <tr>
+                <th style="cursor:pointer">Model</th><th style="cursor:pointer">#Params</th><th style="cursor:pointer">Steps</th>
+                <th style="cursor:pointer">ImgEdit ↑</th><th style="cursor:pointer">GEdit-EN</th><th style="cursor:pointer">GEdit-CN</th>
+                <th style="cursor:pointer">TE-Syn</th><th style="cursor:pointer">TE-Real</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Qwen-Image-Edit-2509</td><td>20B</td><td>50</td><td>4.31</td><td>7.480</td><td>7.467</td><td>13.40</td><td>15.81</td></tr>
+              <tr><td>Qwen-Image-Edit-2511</td><td>20B</td><td>50</td><td><b>4.51</b></td><td>7.877</td><td>7.819</td><td>13.53</td><td><b>16.81</b></td></tr>
+              <tr><td>Z-Image-Edit</td><td>6B</td><td>50</td><td>4.30</td><td>7.570</td><td>7.540</td><td>–</td><td>–</td></tr>
+              <tr><td>LongCat-Image-Edit</td><td>6B</td><td>50</td><td>4.45</td><td>7.748</td><td>7.731</td><td>12.46</td><td>14.89</td></tr>
+              <tr><td>FLUX.2-Klein-4B</td><td>4B</td><td>4</td><td>4.01</td><td>7.717</td><td>7.750</td><td>11.84</td><td>14.46</td></tr>
+              <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>4</td><td>4.18</td><td>8.040</td><td>8.055</td><td>12.73</td><td>15.75</td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow-Edit-Base ★</strong></td><td>4B</td><td>30</td><td>4.28</td><td>7.860</td><td>7.970</td><td>13.63</td><td>15.57</td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow-Edit ★</strong></td><td>4B</td><td>30</td><td>4.34</td><td>8.127</td><td>8.123</td><td><b>14.14</b></td><td>16.26</td></tr>
+              <tr style="background:#eff6ff"><td><strong>Mage-Flow-Edit-Turbo ★</strong></td><td>4B</td><td>4</td><td>4.38</td><td><b>8.271</b></td><td><b>8.264</b></td><td>12.77</td><td>15.41</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.8rem;color:#aaa;margin-top:.5rem">★ = Mage-Flow (ours). Numbers from the technical report under a unified evaluation protocol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOWCASE ══ -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-2">Showcase 🖼️</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen" style="margin-bottom:2vh">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+
+        <h2 class="title is-4">Text-to-Image</h2>
+        <p class="caption" style="margin-bottom:1rem">Prompt following, fine detail, and legible English / Chinese text rendering.</p>
+        <div id="t2i-carousel" class="carousel results-carousel">
+          <div class="item"><h3 class="title is-5 has-text-centered">Showcase</h3><a class="glightbox" href="static/imgs/t2i_teaser.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_teaser.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">General scenes</h3><a class="glightbox" href="static/imgs/t2i_general.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_general.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Cuisine &amp; still life</h3><a class="glightbox" href="static/imgs/t2i_cuisine.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_cuisine.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Portraits</h3><a class="glightbox" href="static/imgs/t2i_portrait.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_portrait.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">English text rendering</h3><a class="glightbox" href="static/imgs/t2i_text_en.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_text_en.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Chinese text rendering</h3><a class="glightbox" href="static/imgs/t2i_text_zh.jpg" data-gallery="t2igal"><img src="static/imgs/t2i_text_zh.jpg" loading="lazy"/></a></div>
+        </div>
+
+        <h2 class="title is-4" style="margin-top:2.5rem">Instruction-based Editing</h2>
+        <p class="caption" style="margin-bottom:1rem">Appearance, content, scene / subject, human-centered &amp; creative, low-level, and restoration edits (source → result).</p>
+        <div id="edit-carousel" class="carousel results-carousel">
+          <div class="item"><h3 class="title is-5 has-text-centered">Showcase</h3><a class="glightbox" href="static/imgs/edit_showcase_1.jpg" data-gallery="edit"><img src="static/imgs/edit_showcase_1.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Showcase</h3><a class="glightbox" href="static/imgs/edit_showcase_2.jpg" data-gallery="edit"><img src="static/imgs/edit_showcase_2.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Content</h3><a class="glightbox" href="static/imgs/edit_content.jpg" data-gallery="edit"><img src="static/imgs/edit_content.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Scene &amp; subject</h3><a class="glightbox" href="static/imgs/edit_scene_subject.jpg" data-gallery="edit"><img src="static/imgs/edit_scene_subject.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Appearance</h3><a class="glightbox" href="static/imgs/edit_appearance.jpg" data-gallery="edit"><img src="static/imgs/edit_appearance.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Human &amp; creative</h3><a class="glightbox" href="static/imgs/edit_human_creative.jpg" data-gallery="edit"><img src="static/imgs/edit_human_creative.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Low-level</h3><a class="glightbox" href="static/imgs/edit_lowlevel.jpg" data-gallery="edit"><img src="static/imgs/edit_lowlevel.jpg" loading="lazy"/></a></div>
+          <div class="item"><h3 class="title is-5 has-text-centered">Restoration</h3><a class="glightbox" href="static/imgs/edit_restoration.jpg" data-gallery="edit"><img src="static/imgs/edit_restoration.jpg" loading="lazy"/></a></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BIBTEX ══ -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX 📚</h2>
+    <pre><code>@techreport{mageflow2026,
+  title       = {Mage-Flow: Efficient Native-Resolution Diffusion Transformer
+                 for Image Generation and Editing},
+  author      = {Microsoft Mage Team},
+  year        = {2026},
+  institution = {Microsoft},
+  eprint      = {2511.22699},
+  archivePrefix = {arXiv},
+  url         = {https://arxiv.org/abs/2511.22699}
+}</code></pre>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page template.
+          &nbsp;·&nbsp; <a href="https://go.microsoft.com/fwlink/?LinkId=521839" target="_blank">Privacy</a>
+          &nbsp;·&nbsp; © 2026 Microsoft</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  GLightbox({ selector:'.glightbox', touchNavigation:true, loop:true });
+
+  bulmaCarousel.attach('#t2i-carousel', {
+    slidesToScroll: 1, slidesToShow: 1, loop: true,
+    navigation: true, pagination: true, autoplay: true, autoplaySpeed: 6000
+  });
+  bulmaCarousel.attach('#edit-carousel', {
+    slidesToScroll: 1, slidesToShow: 1, loop: true,
+    navigation: true, pagination: true, autoplay: true, autoplaySpeed: 6000
+  });
+
+  ['t2i-table','edit-table'].forEach(function(tableId){
+    var table = document.getElementById(tableId);
+    if(!table) return;
+    var headers = Array.from(table.querySelectorAll('thead th'));
+    var baseTxts = headers.map(function(h){ return h.textContent.trim(); });
+    var activeIdx = -1, activeAsc = true;
+    headers.forEach(function(th, idx){
+      th.addEventListener('click', function(){
+        var tbody = table.querySelector('tbody');
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+        var asc = (activeIdx === idx) ? !activeAsc : true;
+        rows.sort(function(a,b){
+          var av = a.children[idx] ? a.children[idx].textContent.replace(/[★↑↓]/g,'').trim() : '';
+          var bv = b.children[idx] ? b.children[idx].textContent.replace(/[★↑↓]/g,'').trim() : '';
+          var an = parseFloat(av), bn = parseFloat(bv);
+          return asc ? (isNaN(an)||isNaN(bn) ? av.localeCompare(bv) : an-bn)
+                     : (isNaN(an)||isNaN(bn) ? bv.localeCompare(av) : bn-an);
+        });
+        rows.forEach(function(r){ tbody.appendChild(r); });
+        headers.forEach(function(h,i){ h.textContent = baseTxts[i]; });
+        th.textContent = baseTxts[idx] + (asc ? ' ↑' : ' ↓');
+        activeIdx = idx; activeAsc = asc;
+      });
+    });
+  });
+});
+
+function showFeature(idx, color, ev){
+  var container = ev && ev.currentTarget ? ev.currentTarget.closest('.feature-container') : document.querySelector('.feature-container');
+  if(!container) return;
+  var tabs = container.querySelectorAll('.feature-tab');
+  var panels = container.querySelectorAll('.feature-panel');
+  tabs.forEach(function(t){ t.classList.remove('active-blue','active-amber','active-purple','active-teal','active-rose','active-indigo'); });
+  panels.forEach(function(p){ p.classList.remove('active'); });
+  if(tabs[idx]) tabs[idx].classList.add('active-'+color);
+  if(panels[idx]) panels[idx].classList.add('active');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.feature-container').forEach(function(c){
+    var first = c.querySelector('.feature-tab');
+    if(!first) return;
+    var color = first.getAttribute('data-color') || 'blue';
+    first.classList.add('active-'+color);
+    var firstPanel = c.querySelector('.feature-panel');
+    if(firstPanel) firstPanel.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
