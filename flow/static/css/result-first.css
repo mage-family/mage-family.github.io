@@ -163,16 +163,8 @@ a { color: inherit; }
 .rf-section-head-single { margin-bottom: 28px; }
 .rf-section-head h2 { margin: 0; color: var(--rf-ink); font-size: clamp(31px, 4vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -.028em; text-wrap: balance; }
 
-.rf-proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.rf-proof-card { overflow: hidden; border: 1px solid var(--rf-line); border-radius: var(--rf-radius-lg); background: #fff; box-shadow: var(--rf-shadow-lg); }
-.rf-proof-card-copy { padding: 22px 24px 17px; text-align: center; }
-.rf-proof-card h3 { margin: 0; color: var(--rf-ink); font-size: 21px; font-weight: 700; }
-.rf-proof-card p { margin: 6px 0 0; color: var(--rf-muted); font-size: 13px; line-height: 1.5; }
-.rf-proof-card img { width: 100%; background: #fff; }
-.rf-proof-strip { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.rf-proof-stat { padding: 22px; border: 1px solid var(--rf-line); border-radius: var(--rf-radius); background: #fff; text-align: center; }
-.rf-proof-stat strong { display: block; color: var(--rf-primary); font-size: 30px; font-weight: 750; }
-.rf-proof-stat span { display: block; margin-top: 6px; color: var(--rf-muted); font-size: 12px; line-height: 1.4; }
+.rf-merged-features { max-width: 960px; margin: 0 auto; }
+.rf-family-speed-stats { grid-template-columns: repeat(5, 1fr); }
 
 .rf-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rf-score-card { padding: 27px; border: 1px solid var(--rf-line); border-radius: var(--rf-radius-lg); background: #fff; box-shadow: var(--rf-shadow); }
@@ -231,7 +223,6 @@ a { color: inherit; }
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
-  scroll-snap-type: x proximity;
   scrollbar-width: thin;
   scrollbar-color: #b8c1cc #eef2f7;
 }
@@ -241,32 +232,29 @@ a { color: inherit; }
 .rf-image-strip::-webkit-scrollbar-thumb { background: #b8c1cc; border-radius: 999px; }
 .rf-image-strip-item {
   flex: 0 0 auto;
-  height: min(72vh, 820px);
   margin: 0;
   overflow: hidden;
-  scroll-snap-align: start;
-  border: 1px solid #e5e9f0;
-  border-radius: 12px;
+  border: 0;
+  border-radius: 0;
   background: #f8fafc;
   box-shadow: var(--shadow-md);
 }
+.rf-image-strip-t2i .rf-image-strip-item { height: min(1521.3px, calc(133.9167vw - 59px)); }
+.rf-image-strip-edit .rf-image-strip-item { height: min(1686.5px, calc(148.4615vw - 65px)); }
 .rf-image-strip-item img {
   width: auto;
   max-width: none;
   height: 100%;
+  border-radius: 0;
   opacity: 0;
   transition: opacity .22s ease;
 }
 .rf-image-strip-item img[src] { opacity: 1; }
-.rf-diversity-figure { margin: 56px auto 0; text-align: center; }
-.rf-diversity-figure img { width: 100%; height: auto; border-radius: var(--rf-radius); box-shadow: var(--shadow-md); }
-.rf-diversity-figure figcaption { margin-top: 10px; color: #666; font-size: .83rem; line-height: 1.5; }
+.rf-diversity-figure { max-width: 1128px; margin: 56px auto 0; text-align: center; }
 
 /* Match the original Mage-VL feature-panel surface exactly. */
 .rf-media-card,
 .rf-metric-grid,
-.rf-proof-card,
-.rf-proof-stat,
 .rf-score-card,
 .rf-details {
   background: #ffffff;
@@ -283,7 +271,8 @@ a { color: inherit; }
   .rf-metric-grid { grid-template-columns: repeat(3, 1fr); }
   .rf-metric:nth-child(4) { border-left: 0; }
   .rf-metric:nth-child(n+4) { border-top: 1px solid var(--rf-line); }
-  .rf-proof-grid, .rf-score-grid { grid-template-columns: 1fr; }
+  .rf-score-grid { grid-template-columns: 1fr; }
+  .rf-family-speed-stats { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 680px) {
   .rf-nav-inner { width: min(100% - 24px, var(--rf-max)); }
@@ -292,14 +281,13 @@ a { color: inherit; }
   .rf-hero { padding-top: 48px; }
   .rf-hero-media { grid-template-columns: 1fr; }
   .rf-media-card img { min-height: 0; }
-  .rf-image-strip-item { height: min(68vh, 620px); }
   .rf-image-strip-shell::after { width: 52px; }
   .rf-metric-grid { grid-template-columns: repeat(2, 1fr); }
   .rf-metric:nth-child(odd) { border-left: 0; }
   .rf-metric:nth-child(even) { border-left: 1px solid var(--rf-line); }
   .rf-metric:nth-child(n+3) { border-top: 1px solid var(--rf-line); }
-  .rf-proof-strip { grid-template-columns: 1fr; }
-  .rf-score-card, .rf-proof-card-copy { padding: 21px; }
+  .rf-score-card { padding: 21px; }
+  .rf-family-speed-stats { grid-template-columns: 1fr; }
   .rf-footer-inner { display: block; text-align: center; }
   .rf-footer-inner span { display: block; margin-top: 7px; }
 }

@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
           loadImage(entry.target);
           observer.unobserve(entry.target);
         });
-      }, { root: strip, rootMargin: '0px 96px', threshold: 0.01 });
+      }, { root: strip, rootMargin: '0px', threshold: 0 });
       lazyImages.forEach(function (image) { imageObserver.observe(image); });
     } else {
       lazyImages.forEach(loadImage);
