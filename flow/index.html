@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/result-first.css?v=5">
+  <link rel="stylesheet" href="static/css/result-first.css?v=6">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
@@ -84,19 +84,30 @@
       </div>
     </section>
 
+    <section class="section" id="abstract">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>Large-scale visual generators are increasingly capable but costly to train, fine-tune, and deploy. We introduce <strong>Mage-Flow</strong>, a compact 4B-scale generative stack for efficient text-to-image generation and instruction-based image editing. The stack is built from two co-designed components: <strong>Mage-VAE</strong>, a lightweight high-fidelity latent tokenizer, and a <strong>Native-Resolution Multimodal Diffusion Transformer</strong> trained with rectified flow matching. Mage-VAE uses one-step diffusion-style encoding and decoding with anchor-latent regularization, preserving the reconstruction quality of strong public VAEs while reducing tokenization cost by more than an order of magnitude. Together with native-resolution packing and stack-level CUDA kernel fusion, the stack supports flexible-resolution training and improves end-to-end training throughput by about 2.5×. Built on this foundation, we develop a complete model family with Base, RL-aligned, and Turbo variants for both generation and editing. Diffusion-NFT improves prompt following, text rendering, aesthetic quality, and editing fidelity, while few-step distillation with adversarial perceptual guidance produces 4-step Turbo models for low-latency inference. Despite its compact scale, Mage-Flow and Mage-Flow-Edit achieve competitive performance across standard generation and editing benchmarks. More importantly, the Turbo variants make high-resolution generation and editing practical for interactive use: at 1024² resolution on a single NVIDIA A100 GPU, Mage-Flow-Turbo generates an image in 0.59 s, and Mage-Flow-Edit-Turbo edits an image in 1.02 s, while maintaining a small memory footprint. These results show that careful tokenizer–backbone–system co-design can deliver strong high-resolution generation and editing within an efficient 4B model family.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="rf-section rf-section-dark" id="performance">
       <div class="rf-container">
-        <div class="rf-section-head">
-          <p class="rf-eyebrow">Quality × speed × memory</p>
-          <h2>Strong results without scaling to tens of billions.</h2>
-          <p>Mage-Flow sits on the quality–latency–memory frontier for both generation and editing, while keeping peak memory around 18–20 GB.</p>
+        <div class="rf-section-head rf-section-head-single">
+          <h2>Quality × speed × memory</h2>
         </div>
 
         <div class="rf-proof-grid">
           <article class="rf-proof-card">
             <div class="rf-proof-card-copy">
               <h3>Generation frontier</h3>
-              <p>GenEval quality against end-to-end latency and peak memory at 1024².</p>
+              <p>GenEval · 1024² · A100</p>
             </div>
             <a class="glightbox" href="static/imgs/speed_generation.jpg" data-gallery="speed">
               <img src="static/imgs/speed_generation.jpg" alt="Generation quality, speed, and memory comparison" loading="lazy">
@@ -105,7 +116,7 @@
           <article class="rf-proof-card">
             <div class="rf-proof-card-copy">
               <h3>Editing frontier</h3>
-              <p>GEdit-EN quality against end-to-end latency and peak memory at 1024².</p>
+              <p>GEdit-EN · 1024² · A100</p>
             </div>
             <a class="glightbox" href="static/imgs/speed_editing.jpg" data-gallery="speed">
               <img src="static/imgs/speed_editing.jpg" alt="Editing quality, speed, and memory comparison" loading="lazy">
@@ -122,10 +133,8 @@
 
     <section class="rf-section rf-section-soft" aria-labelledby="benchmarks-title">
       <div class="rf-container">
-        <div class="rf-section-head">
-          <p class="rf-eyebrow">Benchmark highlights</p>
-          <h2 id="benchmarks-title">Competitive quality. Compact scale.</h2>
-          <p>The headline results below emphasize the quality delivered by the 4B family. Full comparison tables remain available for reproducibility.</p>
+        <div class="rf-section-head rf-section-head-single">
+          <h2 id="benchmarks-title">Benchmark highlights</h2>
         </div>
 
         <div class="rf-score-grid">
@@ -204,15 +213,13 @@
 
     <section class="rf-section" id="showcase">
       <div class="rf-container">
-        <div class="rf-section-head">
-          <p class="rf-eyebrow">Qualitative results</p>
-          <h2>Built to create. Built to edit.</h2>
-          <p>Explore native-resolution generation, bilingual text rendering, source-faithful editing, restoration, and one-to-many creative variation.</p>
+        <div class="rf-section-head rf-section-head-single">
+          <h2>Qualitative results</h2>
         </div>
 
         <div class="rf-gallery-tabs">
           <div class="rf-gallery-group">
-            <div class="rf-gallery-group-head"><h3>Text-to-image</h3><p>Click any gallery to inspect full resolution.</p></div>
+            <div class="rf-gallery-group-head"><h3>Text-to-image</h3></div>
             <div id="t2i-carousel" class="carousel results-carousel">
               <div class="item"><a class="glightbox" href="static/imgs/t2i_general.jpg" data-gallery="t2i"><img src="static/imgs/t2i_general.jpg" alt="General and imaginative scenes" loading="lazy"></a></div>
               <div class="item"><a class="glightbox" href="static/imgs/t2i_cuisine.jpg" data-gallery="t2i"><img src="static/imgs/t2i_cuisine.jpg" alt="Cuisine and still-life generations" loading="lazy"></a></div>
@@ -222,7 +229,7 @@
             </div>
           </div>
           <div class="rf-gallery-group">
-            <div class="rf-gallery-group-head"><h3>Instruction-based editing</h3><p>Source → result across a broad editing taxonomy.</p></div>
+            <div class="rf-gallery-group-head"><h3>Instruction-based editing</h3></div>
             <div id="edit-carousel" class="carousel results-carousel">
               <div class="item"><a class="glightbox" href="static/imgs/one_to_many_editing_diversity.jpg" data-gallery="edit"><img src="static/imgs/one_to_many_editing_diversity.jpg" alt="One source image edited in many different ways" loading="lazy"></a></div>
               <div class="item"><a class="glightbox" href="static/imgs/edit_showcase_2.jpg" data-gallery="edit"><img src="static/imgs/edit_showcase_2.jpg" alt="Mage-Flow-Edit capability showcase" loading="lazy"></a></div>
@@ -240,10 +247,8 @@
 
     <section class="rf-section rf-section-soft" id="why">
       <div class="container is-max-desktop">
-        <div class="rf-section-head">
-          <p class="rf-eyebrow">Why it works</p>
-          <h2>Three ideas behind the result.</h2>
-          <p>The full recipe stays in the technical report. The project page keeps only the three design choices that explain the quality and efficiency.</p>
+        <div class="rf-section-head rf-section-head-single">
+          <h2>Why it works</h2>
         </div>
 
         <div class="feature-container">
@@ -308,28 +313,19 @@
       </div>
     </section>
 
-    <section class="rf-section" id="models">
-      <div class="rf-container">
-        <div class="rf-section-head">
-          <p class="rf-eyebrow">Model family</p>
-          <h2>Choose quality or interactive speed.</h2>
-          <p>Generation and editing share the same compact stack, each released as Base, aligned, and four-step Turbo variants.</p>
-        </div>
-        <div class="rf-family">
-          <article class="rf-family-card"><h3>Mage-Flow</h3><div class="rf-family-path"><div class="rf-family-step"><strong>Base</strong><span>30 steps</span></div><div class="rf-family-step"><strong>Aligned</strong><span>20 steps</span></div><div class="rf-family-step"><strong>Turbo</strong><span>4 steps</span></div></div></article>
-          <article class="rf-family-card"><h3>Mage-Flow-Edit</h3><div class="rf-family-path"><div class="rf-family-step"><strong>Base</strong><span>30 steps</span></div><div class="rf-family-step"><strong>Aligned</strong><span>30 steps</span></div><div class="rf-family-step"><strong>Turbo</strong><span>4 steps</span></div></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="rf-final">
-      <div class="rf-container">
-        <h2>Small enough to study. Strong enough to ship.</h2>
-        <p>Explore the models, reproduce the results, or use the 4B stack as a foundation for generation and editing research.</p>
-        <div class="rf-actions">
-          <a class="rf-button rf-button-primary" href="https://huggingface.co/collections/microsoft/mage" target="_blank" rel="noopener">Explore models</a>
-          <a class="rf-button" href="https://github.com/microsoft/Mage" target="_blank" rel="noopener">View code</a>
-        </div>
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title is-3 has-text-centered">BibTeX 📚</h2>
+        <pre><code>@techreport{mageflow2026,
+  title       = {Mage-Flow: Efficient Native-Resolution Diffusion Transformer
+                 for Image Generation and Editing},
+  author      = {Microsoft Mage Team},
+  year        = {2026},
+  institution = {Microsoft},
+  eprint      = {2511.22699},
+  archivePrefix = {arXiv},
+  url         = {https://arxiv.org/abs/2511.22699}
+}</code></pre>
       </div>
     </section>
   </main>

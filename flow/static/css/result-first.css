@@ -160,10 +160,8 @@ a { color: inherit; }
 .rf-section { padding: clamp(64px, 8vw, 96px) 0; background: #fff; }
 .rf-section-soft, .rf-section-dark { color: var(--rf-ink); background: var(--rf-soft); border-top: 1px solid var(--rf-line); border-bottom: 1px solid var(--rf-line); }
 .rf-section-head { max-width: 800px; margin: 0 auto 34px; text-align: center; }
-.rf-eyebrow { margin: 0 0 10px; color: var(--rf-primary); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.rf-section-dark .rf-eyebrow { color: var(--rf-primary); }
+.rf-section-head-single { margin-bottom: 28px; }
 .rf-section-head h2 { margin: 0; color: var(--rf-ink); font-size: clamp(31px, 4vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -.028em; text-wrap: balance; }
-.rf-section-head p, .rf-section-dark .rf-section-head p { margin: 15px auto 0; color: var(--rf-muted); font-size: 16px; line-height: 1.62; }
 
 .rf-proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .rf-proof-card { overflow: hidden; border: 1px solid var(--rf-line); border-radius: var(--rf-radius-lg); background: #fff; box-shadow: var(--rf-shadow-lg); }
@@ -204,15 +202,6 @@ a { color: inherit; }
 .rf-gallery-group + .rf-gallery-group { margin-top: 40px; }
 .rf-gallery-group-head { margin-bottom: 13px; text-align: center; }
 .rf-gallery-group h3 { margin: 0; color: var(--rf-ink); font-size: 24px; font-weight: 700; }
-.rf-gallery-group p { margin: 5px 0 0; color: var(--rf-muted); font-size: 12px; }
-
-.rf-family { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.rf-family-card { padding: 27px; border: 1px solid var(--rf-line); border-radius: var(--rf-radius-lg); background: #fff; box-shadow: var(--rf-shadow); }
-.rf-family-card h3 { margin: 0; color: var(--rf-ink); font-size: 22px; font-weight: 700; text-align: center; }
-.rf-family-path { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.rf-family-step { padding: 13px 9px; border-radius: 8px; background: var(--rf-accent); text-align: center; }
-.rf-family-step strong { display: block; color: var(--rf-ink); font-size: 12px; }
-.rf-family-step span { display: block; margin-top: 3px; color: var(--rf-muted); font-size: 10px; }
 
 /* Match the original Mage-VL feature-panel surface exactly. */
 .rf-media-card,
@@ -220,19 +209,13 @@ a { color: inherit; }
 .rf-proof-card,
 .rf-proof-stat,
 .rf-score-card,
-.rf-details,
-.rf-family-card {
+.rf-details {
   background: #ffffff;
   border: 1px solid #e5e9f0;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(15,23,42,.06);
 }
 
-.rf-final { padding: 74px 0; color: var(--rf-ink); text-align: center; background: var(--rf-soft); border-top: 1px solid var(--rf-line); }
-.rf-final h2 { margin: 0; color: var(--rf-ink); font-size: clamp(31px, 4vw, 46px); font-weight: 800; letter-spacing: -.025em; }
-.rf-final p { max-width: 650px; margin: 14px auto 0; color: var(--rf-muted); font-size: 15px; line-height: 1.55; }
-.rf-final .rf-actions { margin-top: 22px; }
-.rf-final .rf-button:not(.rf-button-primary) { color: var(--rf-ink); border-color: var(--rf-line); background: #fff; }
 .rf-footer { padding: 30px 0; color: var(--rf-light); background: #fff; font-size: 11px; }
 .rf-footer-inner { display: flex; justify-content: space-between; gap: 20px; }
 .rf-footer a { color: var(--rf-muted); }
@@ -241,7 +224,7 @@ a { color: inherit; }
   .rf-metric-grid { grid-template-columns: repeat(3, 1fr); }
   .rf-metric:nth-child(4) { border-left: 0; }
   .rf-metric:nth-child(n+4) { border-top: 1px solid var(--rf-line); }
-  .rf-proof-grid, .rf-score-grid, .rf-gallery-lead, .rf-family { grid-template-columns: 1fr; }
+  .rf-proof-grid, .rf-score-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
   .rf-nav-inner { width: min(100% - 24px, var(--rf-max)); }
@@ -255,8 +238,7 @@ a { color: inherit; }
   .rf-metric:nth-child(even) { border-left: 1px solid var(--rf-line); }
   .rf-metric:nth-child(n+3) { border-top: 1px solid var(--rf-line); }
   .rf-proof-strip { grid-template-columns: 1fr; }
-  .rf-score-card, .rf-proof-card-copy, .rf-family-card { padding: 21px; }
-  .rf-family-path { grid-template-columns: 1fr; }
+  .rf-score-card, .rf-proof-card-copy { padding: 21px; }
   .rf-footer-inner { display: block; text-align: center; }
   .rf-footer-inner span { display: block; margin-top: 7px; }
 }
