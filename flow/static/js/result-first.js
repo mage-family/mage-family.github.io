@@ -97,6 +97,34 @@ document.addEventListener('DOMContentLoaded', function () {
     requestHintUpdate();
   });
 
+  var diversityResult = document.getElementById('rf-diversity-result');
+  var diversityLabel = document.getElementById('rf-diversity-result-label');
+  var diversityButtons = Array.prototype.slice.call(document.querySelectorAll('.rf-diversity-button'));
+  var diversityRequest = 0;
+  diversityButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (button.classList.contains('is-active') || !diversityResult || !diversityLabel) return;
+      diversityButtons.forEach(function (item) {
+        var active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+
+      var label = button.dataset.label;
+      var request = ++diversityRequest;
+      diversityResult.classList.add('is-loading');
+      diversityLabel.textContent = label.toUpperCase();
+      diversityResult.alt = label + ' editing result';
+      diversityResult.addEventListener('load', function () {
+        if (request === diversityRequest) diversityResult.classList.remove('is-loading');
+      }, { once: true });
+      diversityResult.addEventListener('error', function () {
+        if (request === diversityRequest) diversityResult.classList.remove('is-loading');
+      }, { once: true });
+      diversityResult.src = button.dataset.src;
+    });
+  });
+
   renderBenchmarkTables();
 
   ['t2i-table', 'edit-table'].forEach(function (tableId) {

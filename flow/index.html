@@ -17,13 +17,13 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/result-first.css?v=14">
+  <link rel="stylesheet" href="static/css/result-first.css?v=15">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
   <script defer src="static/js/benchmark-data.js?v=1"></script>
-  <script defer src="static/js/result-first.js?v=6"></script>
+  <script defer src="static/js/result-first.js?v=7"></script>
 </head>
 <body>
   <nav class="rf-nav" aria-label="Project navigation">
@@ -195,9 +195,9 @@
               <thead><tr><th>Model</th><th>Params</th><th>GEdit-EN</th><th>GEdit-CN</th></tr></thead>
               <tbody>
                 <tr class="ours"><td>Mage-Flow-Edit-Turbo</td><td>4B</td><td>8.271</td><td>8.264</td></tr>
-                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>8.040</td><td>8.055</td></tr>
+                <tr><td>FireRed-Image-Edit-1.0</td><td>20B</td><td>7.943</td><td>7.887</td></tr>
+                <tr><td>JoyAI-Image-Edit</td><td>16B</td><td>8.276</td><td>8.125</td></tr>
                 <tr><td>Qwen-Image-Edit-2511</td><td>20B</td><td>7.877</td><td>7.819</td></tr>
-                <tr><td>LongCat-Image-Edit</td><td>6B</td><td>7.748</td><td>7.731</td></tr>
               </tbody>
             </table>
           </article>
@@ -264,10 +264,40 @@
           </div>
         </div>
 
-        <figure class="rf-diversity-figure">
-          <img class="fig-img" src="static/imgs/one_to_many_editing_diversity.jpg" width="1761" height="979" alt="Mage-Flow-Edit one-to-many editing diversity" loading="lazy" decoding="async">
-          <figcaption class="caption" style="margin-top:10px">One-to-many editing diversity — from a single source image and instruction, Mage-Flow-Edit produces multiple faithful yet varied edits.</figcaption>
-        </figure>
+        <div class="rf-diversity-explorer" aria-label="Interactive editing diversity explorer">
+          <div class="rf-diversity-stage">
+            <figure class="rf-diversity-pane">
+              <span class="rf-diversity-badge rf-diversity-badge-source">SOURCE</span>
+              <img src="static/imgs/diversity_dog/source.jpg" width="1024" height="1024" alt="Source dog image" loading="lazy" decoding="async">
+            </figure>
+            <figure class="rf-diversity-pane">
+              <span class="rf-diversity-badge" id="rf-diversity-result-label">BACKGROUND CHANGE</span>
+              <img id="rf-diversity-result" src="static/imgs/diversity_dog/background_change.jpg" width="1024" height="1024" alt="Background change editing result" loading="lazy" decoding="async">
+            </figure>
+          </div>
+          <div class="rf-diversity-controls" role="group" aria-label="Choose an editing type">
+            <button class="rf-diversity-button is-active" type="button" aria-pressed="true" data-label="Background change" data-src="static/imgs/diversity_dog/background_change.jpg">Background change</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Color alteration" data-src="static/imgs/diversity_dog/color_alteration.jpg">Color alteration</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Count change" data-src="static/imgs/diversity_dog/count_change.jpg">Count change</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Extract" data-src="static/imgs/diversity_dog/extract.jpg">Extract</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Canny" data-src="static/imgs/diversity_dog/canny.jpg">Canny</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Colorization" data-src="static/imgs/diversity_dog/colorization.jpg">Colorization</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Depth" data-src="static/imgs/diversity_dog/depth.jpg">Depth</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="HED" data-src="static/imgs/diversity_dog/hed.jpg">HED</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Normal map" data-src="static/imgs/diversity_dog/normal_map.jpg">Normal map</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Segmentation" data-src="static/imgs/diversity_dog/segmentation.jpg">Segmentation</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Sketch" data-src="static/imgs/diversity_dog/sketch.jpg">Sketch</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Material alteration" data-src="static/imgs/diversity_dog/material_alteration.jpg">Material alteration</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Motion change" data-src="static/imgs/diversity_dog/motion_change.jpg">Motion change</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Style change" data-src="static/imgs/diversity_dog/style_change.jpg">Style change</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Subject addition" data-src="static/imgs/diversity_dog/subject_addition.jpg">Subject addition</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Subject removal" data-src="static/imgs/diversity_dog/subject_removal.jpg">Subject removal</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Subject replacement" data-src="static/imgs/diversity_dog/subject_replacement.jpg">Subject replacement</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Tone transfer" data-src="static/imgs/diversity_dog/tone_transfer.jpg">Tone transfer</button>
+            <button class="rf-diversity-button" type="button" aria-pressed="false" data-label="Viewpoint" data-src="static/imgs/diversity_dog/viewpoint.jpg">Viewpoint</button>
+          </div>
+          <p class="caption rf-diversity-caption">Editing diversity — select an edit type to compare the shared source image with the corresponding Mage-Flow-Edit result.</p>
+        </div>
       </div>
     </section>
 
