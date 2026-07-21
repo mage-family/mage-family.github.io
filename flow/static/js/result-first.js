@@ -97,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     requestHintUpdate();
   });
 
+  renderBenchmarkTables();
+
   ['t2i-table', 'edit-table'].forEach(function (tableId) {
     var table = document.getElementById(tableId);
     if (!table) return;
@@ -141,6 +143,46 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+function renderBenchmarkTables() {
+  var benchmarks = window.MAGE_BENCHMARKS;
+  if (!benchmarks) return;
+  renderBenchmarkTable('t2i-table', benchmarks.generation);
+  renderBenchmarkTable('edit-table', benchmarks.editing);
+}
+
+function renderBenchmarkTable(tableId, dataset) {
+  var table = document.getElementById(tableId);
+  if (!table || !dataset) return;
+
+  var headerRow = document.createElement('tr');
+  dataset.columns.forEach(function (label) {
+    var header = document.createElement('th');
+    header.textContent = label;
+    headerRow.appendChild(header);
+  });
+  table.tHead.replaceChildren(headerRow);
+
+  var fragment = document.createDocumentFragment();
+  dataset.rows.forEach(function (row) {
+    var tr = document.createElement('tr');
+    if (row.ours) tr.classList.add('is-selected');
+    [row.type].concat(row.cells).forEach(function (value, index) {
+      var td = document.createElement('td');
+      if (index === 0) td.classList.add('rf-type-cell');
+      if (index === 1 && row.ours) {
+        var strong = document.createElement('strong');
+        strong.textContent = value;
+        td.appendChild(strong);
+      } else {
+        td.textContent = value;
+      }
+      tr.appendChild(td);
+    });
+    fragment.appendChild(tr);
+  });
+  table.tBodies[0].replaceChildren(fragment);
+}
 
 function cellValue(row, index) {
   var cell = row.children[index];

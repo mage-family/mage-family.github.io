@@ -17,12 +17,13 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="stylesheet" href="static/css/result-first.css?v=13">
+  <link rel="stylesheet" href="static/css/result-first.css?v=14">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
-  <script defer src="static/js/result-first.js?v=5"></script>
+  <script defer src="static/js/benchmark-data.js?v=1"></script>
+  <script defer src="static/js/result-first.js?v=6"></script>
 </head>
 <body>
   <nav class="rf-nav" aria-label="Project navigation">
@@ -170,29 +171,33 @@
         <div class="rf-score-grid">
           <article class="rf-score-card">
             <div class="rf-score-top"><h3>Text-to-image generation</h3><span class="rf-score-badge">20 steps</span></div>
-            <div class="rf-score-number">0.90</div>
-            <div class="rf-score-label">GenEval · Mage-Flow · 4B</div>
-            <table class="rf-mini-table" aria-label="Selected GenEval comparison">
-              <thead><tr><th>Model</th><th>Params</th><th>GenEval</th></tr></thead>
+            <div class="rf-score-metrics">
+              <div class="rf-score-metric"><div class="rf-score-number">0.90</div><div class="rf-score-label">GenEval · Mage-Flow</div></div>
+              <div class="rf-score-metric"><div class="rf-score-number">0.944</div><div class="rf-score-label">LongText-EN · Mage-Flow</div></div>
+            </div>
+            <table class="rf-mini-table" aria-label="Selected generation benchmark comparison">
+              <thead><tr><th>Model</th><th>Params</th><th>GenEval</th><th>LongText-EN</th></tr></thead>
               <tbody>
-                <tr class="ours"><td>Mage-Flow</td><td>4B</td><td>0.90</td></tr>
-                <tr><td>FLUX.2-dev</td><td>32B</td><td>0.87</td></tr>
-                <tr><td>Qwen-Image</td><td>20B</td><td>0.87</td></tr>
-                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>0.86</td></tr>
+                <tr class="ours"><td>Mage-Flow</td><td>4B</td><td>0.90</td><td>0.944</td></tr>
+                <tr><td>FLUX.2-dev</td><td>32B</td><td>0.87</td><td>0.963</td></tr>
+                <tr><td>Qwen-Image</td><td>20B</td><td>0.87</td><td>0.943</td></tr>
+                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>0.86</td><td>0.872</td></tr>
               </tbody>
             </table>
           </article>
           <article class="rf-score-card">
             <div class="rf-score-top"><h3>Instruction-based editing</h3><span class="rf-score-badge">4 steps</span></div>
-            <div class="rf-score-number">8.271</div>
-            <div class="rf-score-label">GEdit-EN · Mage-Flow-Edit-Turbo · 4B</div>
-            <table class="rf-mini-table" aria-label="Selected GEdit comparison">
-              <thead><tr><th>Model</th><th>Params</th><th>GEdit-EN</th></tr></thead>
+            <div class="rf-score-metrics">
+              <div class="rf-score-metric"><div class="rf-score-number">8.271</div><div class="rf-score-label">GEdit-EN · Edit-Turbo</div></div>
+              <div class="rf-score-metric"><div class="rf-score-number">8.264</div><div class="rf-score-label">GEdit-CN · Edit-Turbo</div></div>
+            </div>
+            <table class="rf-mini-table" aria-label="Selected editing benchmark comparison">
+              <thead><tr><th>Model</th><th>Params</th><th>GEdit-EN</th><th>GEdit-CN</th></tr></thead>
               <tbody>
-                <tr class="ours"><td>Mage-Flow-Edit-Turbo</td><td>4B</td><td>8.271</td></tr>
-                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>8.040</td></tr>
-                <tr><td>Qwen-Image-Edit-2511</td><td>20B</td><td>7.877</td></tr>
-                <tr><td>LongCat-Image-Edit</td><td>6B</td><td>7.748</td></tr>
+                <tr class="ours"><td>Mage-Flow-Edit-Turbo</td><td>4B</td><td>8.271</td><td>8.264</td></tr>
+                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>8.040</td><td>8.055</td></tr>
+                <tr><td>Qwen-Image-Edit-2511</td><td>20B</td><td>7.877</td><td>7.819</td></tr>
+                <tr><td>LongCat-Image-Edit</td><td>6B</td><td>7.748</td><td>7.731</td></tr>
               </tbody>
             </table>
           </article>
@@ -201,43 +206,25 @@
         <details class="rf-details">
           <summary>View full text-to-image results</summary>
           <div class="rf-details-body">
-            <table class="table is-striped is-hoverable is-fullwidth" id="t2i-table">
-              <thead><tr><th>Model</th><th>#Params</th><th>Steps</th><th>GenEval ↑</th><th>TIIF-Long</th><th>CVTG-2K</th><th>OneIG-EN</th><th>LongText-EN</th></tr></thead>
-              <tbody>
-                <tr><td>Qwen-Image</td><td>20B</td><td>50</td><td>0.87</td><td>86.83</td><td>0.829</td><td>0.539</td><td>0.943</td></tr>
-                <tr><td>LongCat-Image</td><td>6B</td><td>50</td><td>0.87</td><td>81.30</td><td>0.866</td><td>0.516</td><td>0.885</td></tr>
-                <tr><td>Z-Image-Turbo</td><td>6B</td><td>8</td><td>0.82</td><td>80.05</td><td>0.859</td><td>0.528</td><td>0.917</td></tr>
-                <tr><td>FLUX.2-Klein-4B</td><td>4B</td><td>4</td><td>0.83</td><td>79.04</td><td>0.628</td><td>0.500</td><td>0.649</td></tr>
-                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>4</td><td>0.86</td><td>84.13</td><td>0.424</td><td>0.538</td><td>0.872</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow-Base</strong></td><td>4B</td><td>30</td><td>0.79</td><td>83.19</td><td>0.851</td><td>0.542</td><td>0.904</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow</strong></td><td>4B</td><td>20</td><td>0.90</td><td>84.70</td><td>0.887</td><td>0.536</td><td>0.944</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow-Turbo</strong></td><td>4B</td><td>4</td><td>0.88</td><td>84.16</td><td>0.873</td><td>0.523</td><td>0.911</td></tr>
-              </tbody>
+            <table class="table is-striped is-hoverable is-fullwidth" id="t2i-table" aria-label="Complete text-to-image benchmark table">
+              <thead></thead>
+              <tbody></tbody>
             </table>
-            <p class="rf-footnote">GenEval, CVTG-2K, OneIG, and LongText are reported on 0–1 scales; TIIF-Long is reported on a 0–100 scale.</p>
+            <p class="rf-footnote">33 models · 13 columns. GenEval, CVTG-2K, OneIG, and LongText use 0–1 scales; DPG and TIIF use 0–100 scales.</p>
           </div>
         </details>
 
         <details class="rf-details">
           <summary>View full image editing results</summary>
           <div class="rf-details-body">
-            <table class="table is-striped is-hoverable is-fullwidth" id="edit-table">
-              <thead><tr><th>Model</th><th>#Params</th><th>Steps</th><th>ImgEdit ↑</th><th>GEdit-EN</th><th>GEdit-CN</th><th>TextEdit-Syn</th><th>TextEdit-Real</th></tr></thead>
-              <tbody>
-                <tr><td>Qwen-Image-Edit-2509</td><td>20B</td><td>50</td><td>4.31</td><td>7.480</td><td>7.467</td><td>13.40</td><td>15.81</td></tr>
-                <tr><td>Qwen-Image-Edit-2511</td><td>20B</td><td>50</td><td>4.51</td><td>7.877</td><td>7.819</td><td>13.53</td><td>16.81</td></tr>
-                <tr><td>Z-Image-Edit</td><td>6B</td><td>50</td><td>4.30</td><td>7.570</td><td>7.540</td><td>–</td><td>–</td></tr>
-                <tr><td>LongCat-Image-Edit</td><td>6B</td><td>50</td><td>4.45</td><td>7.748</td><td>7.731</td><td>12.46</td><td>14.89</td></tr>
-                <tr><td>FLUX.2-Klein-4B</td><td>4B</td><td>4</td><td>4.01</td><td>7.717</td><td>7.750</td><td>11.84</td><td>14.46</td></tr>
-                <tr><td>FLUX.2-Klein-9B</td><td>9B</td><td>4</td><td>4.18</td><td>8.040</td><td>8.055</td><td>12.73</td><td>15.75</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow-Edit-Base</strong></td><td>4B</td><td>30</td><td>4.28</td><td>7.860</td><td>7.970</td><td>13.63</td><td>15.57</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow-Edit</strong></td><td>4B</td><td>30</td><td>4.34</td><td>8.127</td><td>8.123</td><td>14.14</td><td>16.26</td></tr>
-                <tr class="is-selected"><td><strong>Mage-Flow-Edit-Turbo</strong></td><td>4B</td><td>4</td><td>4.38</td><td>8.271</td><td>8.264</td><td>12.77</td><td>15.41</td></tr>
-              </tbody>
+            <table class="table is-striped is-hoverable is-fullwidth" id="edit-table" aria-label="Complete image-editing benchmark table">
+              <thead></thead>
+              <tbody></tbody>
             </table>
-            <p class="rf-footnote">ImgEdit is reported on a 0–5 scale, GEdit on a 0–10 scale, and TextEdit on a 0–25 scale.</p>
+            <p class="rf-footnote">31 models · 9 columns. ImgEdit uses a 0–5 scale, GEdit a 0–10 scale, and TextEdit a 0–25 scale.</p>
           </div>
         </details>
+        <p class="rf-benchmark-source">Complete tables synced from the Mage-Flow Overleaf report at commit <code>32dae10</code>.</p>
       </div>
     </section>
 
